@@ -49,10 +49,24 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
     -   自定义
 -   `name` 建议为每条映射配置一个标识
     -   `appname-urlname`
-1. namespace
 1. include
 1. reverse
     -   需要映射有 `name`
     -   在模版中使用 `url` 标签
     -   在 Python 代码中使用 `reverse` 函数
+1. namespace
+
+## 数据建模的 10 大设计原则
+
+1. 命名清晰，无歧义
+1. 一表一用
+1. 不使用带有物理意义的字段作为主键
+1. 完整性，数据信息完整
+1. 可追溯，创建时间、修改时间, 可以逻辑删除
+1. 一致性，相同的数据存储在同一张表
+1. 不使用 `join` 操作查询
+1. 冷热分离，冷数据和热数据分离
+1. 长短分离，长文本和短文本分离，长文本独立存储
+1. 索引完备
+
 
