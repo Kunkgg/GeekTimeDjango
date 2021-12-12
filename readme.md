@@ -13,3 +13,4 @@ python manage.py migrate
 python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 ```
 
+## 添加第一个数据模型 Job 
