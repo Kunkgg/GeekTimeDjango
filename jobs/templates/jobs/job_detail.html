@@ -1,0 +1,10 @@
+{% extends 'jobs/base.html' %}
+{% block content %}
+<h2>{{ job.job_name }}</h2>
+<p>职位类型: {{ job.job_type }} | 职位城市: {{ job.job_city }}</p>
+<p>创建人: {{ job.creator }} |  创建时间: {{ job.created_date }} |  修改时间: {{ job.modified_date }}</p>
+<h4>职位职责</h4>
+<p>{{ job.job_responsibility }}</p>
+<h4>职位要求</h4>
+<p>{{ job.job_requirement }}</p>
+{% endblock %}
