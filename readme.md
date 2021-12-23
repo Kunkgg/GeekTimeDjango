@@ -69,4 +69,9 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. 长短分离，长文本和短文本分离，长文本独立存储
 1. 索引完备
 
+## 创建 Interview app
+
+1. Candidate 数据模型
+1. admin 列表页面信息定制、编辑页面分组展示
+
 

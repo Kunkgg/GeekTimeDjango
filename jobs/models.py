@@ -3,7 +3,9 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-# Create your models here.
+# 候选人学历
+DEGREE_TYPE = (('本科', '本科'), ('硕士', '硕士'), ('博士', '博士'))
+
 
 JobTypes = (
     (0, '开发'),
