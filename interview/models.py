@@ -3,16 +3,13 @@ from django.contrib.auth.models import User
 
 from jobs.models import DEGREE_TYPE
 
+
 # 第一轮面试结果
 FIRST_INTERVIEW_RESULT_TYPE = (('建议复试', '建议复试'), ('待定', '待定'), ('放弃', '放弃'))
-
 # 复试面试建议
 INTERVIEW_RESULT_TYPE = (('建议录用', '建议录用'), ('待定', '待定'), ('放弃', '放弃'))
-
-
 # HR终面结论
 HR_SCORE_TYPE = (('S', 'S'), ('A', 'A'), ('B', 'B'), ('C', 'C'))
-
 
 class Candidate(models.Model):
     # 基础信息
