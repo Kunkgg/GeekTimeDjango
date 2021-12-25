@@ -74,4 +74,6 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. Candidate 数据模型
 1. admin 列表页面信息定制、编辑页面分组展示
 
+# Django 命令行工具，候选人数据批量导入
 
+1. 批量导入 `csv` 格式候选人数据
