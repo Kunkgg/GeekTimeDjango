@@ -77,3 +77,10 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 # Django 命令行工具，候选人数据批量导入
 
 1. 批量导入 `csv` 格式候选人数据
+2. fake_candidate 命令行工具
+
+# Admin 筛选器、排序、搜索
+
+1. ModelAdmin.list_filter
+1. ModelAdmin.ordering
+1. ModelAdmin.search_fields

@@ -7,8 +7,14 @@ class CandidateAdmin(admin.ModelAdmin):
     exclude = ('creator', 'created_date', 'modified_date', 'last_editor')
 
     list_display = (
-    'username', 'city', 'bachelor_school', 'first_score', 'first_result', 'first_interviewer_user', 'second_score',
+    'username', 'city', 'bachelor_school', 'test_score_of_general_ability', 'paper_score', 'first_score', 'first_result', 'first_interviewer_user', 'second_score',
     'second_result', 'second_interviewer_user', 'hr_score', 'hr_result', 'hr_interviewer_user',)
+
+    search_fields = ('username', 'city', 'bachelor_school', 'phone', 'email')
+
+    list_filter = ('city', 'gender')
+
+    ordering = ('test_score_of_general_ability', 'paper_score')
 
     fieldsets = (
         ('基础信息', {
