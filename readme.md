@@ -74,13 +74,19 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. Candidate 数据模型
 1. admin 列表页面信息定制、编辑页面分组展示
 
-# Django 命令行工具，候选人数据批量导入
+## Django 命令行工具，候选人数据批量导入
 
 1. 批量导入 `csv` 格式候选人数据
 2. fake_candidate 命令行工具
 
-# Admin 筛选器、排序、搜索
+## Admin 筛选器、排序、搜索
 
 1. ModelAdmin.list_filter
 1. ModelAdmin.ordering
 1. ModelAdmin.search_fields
+
+## LDAP 登录
+
+1. https://github.com/etianen/django-python3-ldap
+1. 批量导入帐号 `./manage.py ldap_sync_users`
+1. 为指定帐号设置超级用户权限 `./manage.py ldap_promote <username>`
