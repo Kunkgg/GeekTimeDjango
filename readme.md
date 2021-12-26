@@ -90,3 +90,8 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. https://github.com/etianen/django-python3-ldap
 1. 批量导入帐号 `./manage.py ldap_sync_users`
 1. 为指定帐号设置超级用户权限 `./manage.py ldap_promote <username>`
+
+## 导出 Candidate 为 csv 文件
+
+1. 定义 admin action 导出数据
+1. 参考 [](https://stackoverflow.com/questions/18685223/how-to-export-django-model-data-into-csv-file)
