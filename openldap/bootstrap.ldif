@@ -1,0 +1,111 @@
+dn: cn=developer,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: developer
+givenname: developer
+sn: Developer
+displayname: Developer User
+mail: developer@gmail.com
+userpassword: developer_pass
+
+dn: cn=maintainer,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: maintainer
+givenname: maintainer
+sn: Maintainer
+displayname: Maintainer User
+mail: maintainer@gmail.com
+userpassword: maintainer_pass
+
+dn: cn=admin_gh,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: admin_gh
+givenname: admin_gh
+sn: AdminGithub
+displayname: Admin Github User
+mail: admin_gh@gmail.com
+userpassword: admin_gh_pass
+
+dn: cn=lily_hr,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: lily_hr
+givenname: lily_hr
+sn: Lily
+displayname: Lily HR
+mail: lily_hr@gmail.com
+userpassword: lily_hr_pass
+
+dn: cn=bob_inter,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: bob_inter
+givenname: bob_inter
+sn: Bob
+displayname: Bob Inter
+mail: bob_inter@gmail.com
+userpassword: bob_inter_pass
+
+dn: cn=tom_candi,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: tom_candi
+givenname: tom_candi
+sn: Tom
+displayname: Tom Candi
+mail: tom_candi@gmail.com
+userpassword: tom_candi_pass
+
+dn: cn=tony_candi,dc=example,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: tony_candi
+givenname: tony_candi
+sn: Tony
+displayname: Tony Candi
+mail: tony_candi@gmail.com
+userpassword: tony_candi_pass
+
+dn: ou=Groups,dc=example,dc=org
+changetype: add
+objectclass: organizationalUnit
+ou: Groups
+
+dn: ou=Users,dc=example,dc=org
+changetype: add
+objectclass: organizationalUnit
+ou: Users
+
+dn: cn=Admins,ou=Groups,dc=example,dc=org
+changetype: add
+cn: Admins
+objectclass: groupOfUniqueNames
+uniqueMember: cn=admin_gh,dc=example,dc=org
+
+dn: cn=Maintaners,ou=Groups,dc=example,dc=org
+changetype: add
+cn: Maintaners
+objectclass: groupOfUniqueNames
+uniqueMember: cn=maintainer,dc=example,dc=org
+uniqueMember: cn=developer,dc=example,dc=org
+
+dn: cn=HRs,ou=Groups,dc=example,dc=org
+changetype: add
+cn: HRs
+objectclass: groupOfUniqueNames
+uniqueMember: cn=lily_hr,dc=example,dc=org
+
+dn: cn=Interviewers,ou=Groups,dc=example,dc=org
+changetype: add
+cn: Interviewers
+objectclass: groupOfUniqueNames
+uniqueMember: cn=bob_inter,dc=example,dc=org
+
+dn: cn=Candidates,ou=Groups,dc=example,dc=org
+changetype: add
+cn: Candidates
+objectclass: groupOfUniqueNames
+uniqueMember: cn=tom_candi,dc=example,dc=org
+uniqueMember: cn=tony_candi,dc=example,dc=org
