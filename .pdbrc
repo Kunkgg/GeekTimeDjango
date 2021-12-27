@@ -1,0 +1,9 @@
+import IPython
+from traitlets.config import get_config
+
+cfg = get_config()
+# enable syntax highlighting
+cfg.InteractiveShellEmbed.colors = 'Linux'
+cfg.InteractiveShellEmbed.confirm_exit = False
+
+alias interacti IPython.embed(config=cfg)
