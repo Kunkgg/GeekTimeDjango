@@ -1,7 +1,11 @@
+import logging
+
 from django.shortcuts import render
 from .models import Job
 from .models import JobTypes
 from .models import Cities
+
+LOG = logging.getLogger()
 
 
 def job_list(request):
@@ -23,5 +27,6 @@ def job_detail(request, job_id):
         'job': job,
     }
 
+    LOG.info(f"request method: {request.method}, path: {request.path}")
     return render(request, 'jobs/job_detail.html', context)
     

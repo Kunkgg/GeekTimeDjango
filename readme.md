@@ -95,3 +95,8 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 
 1. 定义 admin action 导出数据
 1. 参考 [](https://stackoverflow.com/questions/18685223/how-to-export-django-model-data-into-csv-file)
+
+## 如何使用日志
+
+1. 在 `settings.py` 中定义 `LOGGING` 变量, 
+它是一个标准库 logging 模块的 dictConfig 字典。
