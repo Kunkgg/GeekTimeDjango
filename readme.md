@@ -100,3 +100,18 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 
 1. 在 `settings.py` 中定义 `LOGGING` 变量, 
 它是一个标准库 logging 模块的 dictConfig 字典。
+
+## 生产环境与开发环境配置分离
+
+1. 生产环境与开发环境配置注意区别
+    - 生产环境一般不允许有 DEBUG 信息
+    - 生产环境不允许有密钥、证书等敏感信息
+    - 生产环境和开发环境可能使用不同的数据库
+1. 通过 `DJANGO_SETTINGS_MODULE` 环境变量指定配置模块路径，
+默认路径为 `project_name.settings`, 可在 `manage.py` 中修改。
+当既没有从命令行指定 `manage.py runserver --settings=settings.local`,
+也没有设置环境变量 `DJANGO_SETTINGS_MODULE` 时默认配置会才会生效。
+1. 配置文件优先级顺序
+    1. 命令行指定
+    1. 环境变量指定
+    1. 默认值

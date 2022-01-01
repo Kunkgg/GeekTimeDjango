@@ -4,9 +4,19 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "runserver",
+            "label": "runserver-base",
             "type": "shell",
             "command": "python manage.py runserver"
+        },
+        {
+            "label": "runserver-local",
+            "type": "shell",
+            "command": "python manage.py runserver --settings settings.local"
+        },
+        {
+            "label": "runserver-pro",
+            "type": "shell",
+            "command": "python manage.py runserver --settings settings.product"
         }
     ]
 }
