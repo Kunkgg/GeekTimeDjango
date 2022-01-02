@@ -8,6 +8,10 @@ from django.http import HttpResponse
 
 
 from .models import Candidate
+from .candidate_fieldsets import basic_fieldsets
+from .candidate_fieldsets import first_interviewer_fieldsets
+from .candidate_fieldsets import second_interviewer_fieldsets
+from .candidate_fieldsets import hr_interviewer_fieldsets
 
 LOG = logging.getLogger()
 
@@ -66,79 +70,19 @@ class CandidateAdmin(admin.ModelAdmin):
 
     actions = (export_model_as_csv,)
 
-    fieldsets = (
-        ('基础信息', {
-            'description': '面试人员基本信息',
-            'fields': (
-                "userid",
-                ("username",  "city", "phone"),
-                ("gender", "born_address"),
-                ("apply_position", "email"),
-                "candidate_remark",
-            )
-        }),
-        ('学校与学历信息', {
-            'fields': (
-                "bachelor_school",
-                "master_school",
-                "doctor_school",
-                "major",
-                "degree",
-            )
-        }),
-        ('综合能力测评成绩，笔试测评成绩', {
-            'fields': (
-                "test_score_of_general_ability",
-                "paper_score",
-            )
-        }),
-        ('第一轮面试记录', {
-            'fields': (
-                "first_score",
-                "first_learning_ability",
-                "first_professional_competency",
-                "first_advantage",
-                "first_disadvantage",
-                "first_result",
-                "first_recommend_position",
-                "first_interviewer_user",
-                "first_remark",
-            )
-        }),
-        ('第二轮面试记录', {
-            'classes': ('extrapretty',),
-            'fields': (
-                "second_score",
-                "second_learning_ability",
-                "second_professional_competency",
-                "second_pursue_of_excellence",
-                "second_communication_ability",
-                "second_pressure_score",
-                "second_advantage",
-                "second_disadvantage",
-                "second_result",
-                "second_recommend_position",
-                "second_interviewer_user",
-                "second_remark",
-            )
-        }),
-        ('HR终面', {
-            'classes': ('collapse', 'extrapretty'),
-            'fields': (
-                "hr_score",
-                "hr_responsibility",
-                "hr_communication_ability",
-                "hr_logic_ability",
-                "hr_potential",
-                "hr_stability",
-                "hr_advantage",
-                "hr_disadvantage",
-                "hr_result",
-                "hr_interviewer_user",
-                "hr_remark",
-            )
-        })
-    )
+    # fieldsets = hr_interviewer_fieldsets
+
+    def get_fieldsets(self, request, obj):
+        rv = basic_fieldsets
+        group_names = self.get_group_names(request.user)
+        if request.user.username == 'admin' or 'HR' in group_names:
+            rv = hr_interviewer_fieldsets
+        elif 'Interviewer' in group_names:
+            if request.user == obj.first_interviewer_user:
+                rv = first_interviewer_fieldsets
+            elif request.user == obj.second_interviewer_user:
+                rv = second_interviewer_fieldsets
+        return rv
 
     # readonly_fields = ('first_interviewer_user', 'second_interviewer_user', 'hr_interviewer_user')
 

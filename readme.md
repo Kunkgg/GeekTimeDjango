@@ -138,3 +138,16 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. ModelAdmin.get_readonly_fields(request, obj=None) 方法， 添加只读字段的逻辑，
 比如仅当当前用户为 admin 或 HR 用户组成员时开放面试官字段的编辑权限，其他用户对面试官只读
 
+## 替换 admin 默认主题
+
+1. 安装主题包
+1. 添加进 `INSTALLED_APPS`
+1. 配置 `urls.py`
+1. 注意， `django-grappelli==2.15.3` 在 Django 3 中使用会报错。[resolved-issue](https://github.com/sehmaschine/django-grappelli/issues/978)
+1. [Github django-grappelli](https://github.com/sehmaschine/django-grappelli)
+
+## 更灵活的方式设置 admin fieldsets
+
+1. get_fieldsets(self, request, obj) 方法
+1. 第一二轮面试官仅允许便是其相应的范围
+
