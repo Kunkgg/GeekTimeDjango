@@ -1,10 +1,15 @@
 from datetime import datetime
 import csv
+import logging
+
+
 from django.contrib import admin
 from django.http import HttpResponse
 
 
 from .models import Candidate
+
+LOG = logging.getLogger()
 
 
 # 导出为 csv 文件
@@ -49,7 +54,8 @@ class CandidateAdmin(admin.ModelAdmin):
     exclude = ('creator', 'created_date', 'modified_date', 'last_editor')
 
     list_display = (
-    'username', 'city', 'bachelor_school', 'test_score_of_general_ability', 'paper_score', 'first_score', 'first_result', 'first_interviewer_user', 'second_score',
+    'username', 'city', 'bachelor_school', 'test_score_of_general_ability',
+    'paper_score', 'first_score', 'first_result', 'first_interviewer_user', 'second_score',
     'second_result', 'second_interviewer_user', 'hr_score', 'hr_result', 'hr_interviewer_user',)
 
     search_fields = ('username', 'city', 'bachelor_school', 'phone', 'email')
@@ -133,5 +139,19 @@ class CandidateAdmin(admin.ModelAdmin):
             )
         })
     )
+
+    # readonly_fields = ('first_interviewer_user', 'second_interviewer_user', 'hr_interviewer_user')
+
+    def get_group_names(self, user):
+        return [group.name for group in user.groups.all()]
+
+    def get_readonly_fields(self, request, obj):
+        group_names = self.get_group_names(request.user)
+        LOG.info(f"user:{request.user.username}, group_names: {group_names}")
+
+        if request.user.username == 'admin' or 'HR' in group_names:
+            return ()
+        else:
+            return ('first_interviewer_user', 'second_interviewer_user', 'hr_interviewer_user')
 
 admin.site.register(Candidate, CandidateAdmin)

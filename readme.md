@@ -131,3 +131,10 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
     - 多对多关系
 1. 这里以为候选人设置面试关为例， 演示多对一关系， 多个候选人可以对应同一个面试官
 1. 面试官使用 `django.contrib.auth.models.User`
+
+## 设置 admin 只读字段
+
+1. ModelAdmin.readonly_fields 属性， 指定 read_only 序列
+1. ModelAdmin.get_readonly_fields(request, obj=None) 方法， 添加只读字段的逻辑，
+比如仅当当前用户为 admin 或 HR 用户组成员时开放面试官字段的编辑权限，其他用户对面试官只读
+
