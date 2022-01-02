@@ -122,3 +122,12 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. admin 站点其他属性参考 https://docs.djangoproject.com/en/4.0/ref/contrib/admin/
 1. 尝试了在项目 app 目录下新建 `admin.py` 文件中设置， 但结果不能生效。
 说明 django 可能不会像处理其他 `startapp` 创建的目录中的 `admin.py` 一样处理项目 app 目录下的 `admin.py`。 
+
+## 简单的 model 外键引用
+
+1. model 的之间的关系其实就是数据库数据模型之间的关系， 包含三种
+    - 一对多关系
+    - 多对一关系
+    - 多对多关系
+1. 这里以为候选人设置面试关为例， 演示多对一关系， 多个候选人可以对应同一个面试官
+1. 面试官使用 `django.contrib.auth.models.User`
