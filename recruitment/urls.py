@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from jobs import views as jobs_views
 
+admin.site.site_header = '匠果科技招聘系统'
+admin.site.site_title = '匠果科技招聘系统'
+
 urlpatterns = [
     path('', jobs_views.job_list),
     path('admin/', admin.site.urls),

@@ -115,3 +115,10 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
     1. 命令行指定
     1. 环境变量指定
     1. 默认值
+
+## 自定义 admin 站点的 header 和 title
+
+1. 在项目 `urls.py` 中设置 `admin.site.site_header` 和 `admin.site.site_title`
+1. admin 站点其他属性参考 https://docs.djangoproject.com/en/4.0/ref/contrib/admin/
+1. 尝试了在项目 app 目录下新建 `admin.py` 文件中设置， 但结果不能生效。
+说明 django 可能不会像处理其他 `startapp` 创建的目录中的 `admin.py` 一样处理项目 app 目录下的 `admin.py`。 
