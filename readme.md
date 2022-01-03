@@ -128,6 +128,7 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. model 的之间的关系其实就是数据库数据模型之间的关系， 包含三种
     - 一对多关系
     - 多对一关系
+    - 一对一关系
     - 多对多关系
 1. 这里以为候选人设置面试关为例， 演示多对一关系， 多个候选人可以对应同一个面试官
 1. 面试官使用 `django.contrib.auth.models.User`
