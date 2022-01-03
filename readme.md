@@ -156,3 +156,9 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. 覆盖 `get_queryset(self, request)` 方法，
 实现面试官仅可以浏览分配到自己的候选人列表
 
+## 自定义权限
+
+1. 定义候选人信息导出权限
+1. 在 `class Meta` 中定义 `permissions`
+1. 编辑对应 action 函数的 `allowed_permissions` 属性
+1. 定义 admin class 中的 `has_XX_permission(self, reuqest)` 方法

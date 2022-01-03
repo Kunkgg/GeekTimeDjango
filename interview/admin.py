@@ -54,6 +54,7 @@ def export_model_as_csv(modeladmin, request, queryset):
     return response
 
 export_model_as_csv.short_description = '导出为 CSV 文件'
+export_model_as_csv.allowed_permissions = ('export',)
 
 class CandidateAdmin(admin.ModelAdmin):
     exclude = ('creator', 'created_date', 'modified_date', 'last_editor')
@@ -70,6 +71,9 @@ class CandidateAdmin(admin.ModelAdmin):
     ordering = ('test_score_of_general_ability', 'paper_score')
 
     actions = (export_model_as_csv,)
+
+    def has_export_permission(self, request):
+        return request.user.has_perm(f'{self.opts.app_label}.export')
 
     # fieldsets = hr_interviewer_fieldsets
 
