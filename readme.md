@@ -163,3 +163,11 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. 在 `class Meta` 中定义 `permissions`
 1. 编辑对应 action 函数的 `allowed_permissions` 属性
 1. 定义 admin class 中的 `has_XX_permission(self, reuqest)` 方法
+
+## 集成注册登录功能
+
+1. [django-registration-redux](https://github.com/macropin/django-registration) 支持三种方式
+    - 用户激活邮件两步认证
+    - 管理员激活邮件两步认证
+    - 简单直无需激活一步认证
+1. 支持第三方认证 [django-allauth](https://www.intenct.nl/projects/django-allauth/)

@@ -6,17 +6,17 @@
         {
             "label": "runserver-base",
             "type": "shell",
-            "command": "python manage.py runserver"
+            "command": "/home/gk07/.local/pyenv/versions/GeekTimeDjango/bin/python manage.py runserver"
         },
         {
             "label": "runserver-local",
             "type": "shell",
-            "command": "python manage.py runserver --settings settings.local"
+            "command": "/home/gk07/.local/pyenv/versions/GeekTimeDjango/bin/python manage.py runserver --settings settings.local"
         },
         {
             "label": "runserver-pro",
             "type": "shell",
-            "command": "python manage.py runserver --settings settings.product"
+            "command": "/home/gk07/.local/pyenv/versions/GeekTimeDjango/bin/python manage.py runserver --settings settings.product"
         }
     ]
 }

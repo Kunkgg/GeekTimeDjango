@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'grappelli',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'recruitment.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'jobs/templates/jobs'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -245,5 +246,14 @@ LOGGING = {
     #     },
     # },
 }
+#endregion
+
+# ---------------------------------------------------------------------------
+#   django-registration-redux
+# ---------------------------------------------------------------------------
+#region
+# REGISTRATION_OPEN = True
+LOGIN_REDIRECT_URL = '/'
+# SIMPLE_BACKEND_REDIRECT_URL = '/accounts/login/'
 #endregion
 
