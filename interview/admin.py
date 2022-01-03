@@ -5,6 +5,7 @@ import logging
 
 from django.contrib import admin
 from django.http import HttpResponse
+from django.db.models import Q
 
 
 from .models import Candidate
@@ -97,5 +98,18 @@ class CandidateAdmin(admin.ModelAdmin):
             return ()
         else:
             return ('first_interviewer_user', 'second_interviewer_user', 'hr_interviewer_user')
+
+    def get_queryset(self, request):
+        rv = Candidate.objects.none()
+        qs = super().get_queryset(request)
+        group_names = self.get_group_names(request.user)
+
+        if request.user.is_superuser or 'HR' in group_names:
+            rv = qs
+        elif 'Interviewer' in group_names:
+            rv = Candidate.objects.filter(Q(first_interviewer_user=request.user) | Q(second_interviewer_user=request.user))
+
+        return rv
+
 
 admin.site.register(Candidate, CandidateAdmin)

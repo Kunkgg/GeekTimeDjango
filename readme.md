@@ -151,3 +151,8 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. get_fieldsets(self, request, obj) 方法
 1. 第一二轮面试官仅允许便是其相应的范围
 
+## admin get_queryset
+
+1. 覆盖 `get_queryset(self, request)` 方法，
+实现面试官仅可以浏览分配到自己的候选人列表
+
