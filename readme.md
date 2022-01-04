@@ -190,3 +190,7 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. [django-bulma](https://github.com/timonweb/django-bulma)
 1. [django-tailwind](https://github.com/timonweb/django-tailwind)
 
+## 安排简历进入面试环节
+
+1. Resume admin 增加 `enter_interview_process` action
+1. 使用 Django message
