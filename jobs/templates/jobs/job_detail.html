@@ -7,4 +7,5 @@
 <p>{{ job.job_responsibility }}</p>
 <h4>职位要求</h4>
 <p>{{ job.job_requirement }}</p>
+<input type="button" value="申请" onclick="location.href='/resume/add/?apply_position={{job.job_name}}&city={{job.job_city}}'"/>
 {% endblock %}

@@ -11,7 +11,8 @@
         {
             "label": "runserver-local",
             "type": "shell",
-            "command": "/home/gk07/.local/pyenv/versions/GeekTimeDjango/bin/python manage.py runserver --settings settings.local"
+            "command": "/home/gk07/.local/pyenv/versions/GeekTimeDjango/bin/python manage.py runserver --settings settings.local",
+            "problemMatcher": []
         },
         {
             "label": "runserver-pro",

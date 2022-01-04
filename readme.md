@@ -175,3 +175,12 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 ## 编辑模版显示用户登录状态
 
 1. 在 `base.html` 增加 `nav` 元素，显示用户登录状态
+
+## 增加简历数据模型
+
+## 用户投递简历
+
+1. 已注册的用户可以在岗位详情页面点击 `提交申请` 按钮，提交简历
+1. 简历与当前用户关联
+1. 使用通用视图 `CreateView`
+

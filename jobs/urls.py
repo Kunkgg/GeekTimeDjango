@@ -1,5 +1,6 @@
 
 from .views import job_list, job_detail
+from .views import ResumeCreateView
 from django.urls import path, re_path
 
 urlpatterns = [

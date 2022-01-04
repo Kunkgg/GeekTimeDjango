@@ -22,6 +22,7 @@ admin.site.site_title = '匠果科技招聘系统'
 
 urlpatterns = [
     path('', jobs_views.job_list),
+    path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume_add'),
     path('grappelli/', include('grappelli.urls')),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
