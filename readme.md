@@ -171,3 +171,7 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
     - 管理员激活邮件两步认证
     - 简单直无需激活一步认证
 1. 支持第三方认证 [django-allauth](https://www.intenct.nl/projects/django-allauth/)
+
+## 编辑模版显示用户登录状态
+
+1. 在 `base.html` 增加 `nav` 元素，显示用户登录状态
