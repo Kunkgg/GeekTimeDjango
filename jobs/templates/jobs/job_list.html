@@ -1,12 +1,17 @@
 {% extends 'jobs/base.html' %}
-{% block content%}
-<h1>职位列表</h1>
+{% block bootstrap5_content%}
+<section class="mt-5">
+    <h3>职位列表</h3>
     {% for job in jobs %}
-        <div>
-            <h3><a href="/jobs/{{ job.id }}">{{ job.job_name }}</a></h3>
-            <p>{{ job.job_type }}, {{ job.job_city }}</p>
-            <p>{{ job.job_responsibility }}</p>
-            <p>{{ job.job_requirement }}</p>
+        <div class="card mt-3 bg-light">
+            <div class="card-body">
+                <p class="fs-5 fw-bold">{{ job.job_name }}</p>
+                <p>{{ job.job_type }}, {{ job.job_city }}</p>
+                <p>{{ job.job_responsibility }}</p>
+                <p>{{ job.job_requirement }}</p>
+                <a href="/jobs/{{ job.id }}" class="btn btn-secondary">详情</a>
+            </div>
         </div>
     {% endfor %}
+</section>
 {% endblock %}

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'grappelli',
+    'bootstrap5',
     'registration',
     'django.contrib.admin',
     'django.contrib.auth',

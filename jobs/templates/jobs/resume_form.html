@@ -1,7 +1,13 @@
 {% extends 'jobs/base.html' %}
-{% block content %}
-    <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
+{% load bootstrap5 %}
+{% block bootstrap5_content %}
+    <section class="w-75 m-auto">
+        <h4 class="mt-5 text-center">填写简历</h4>
+        <form class="mt-5" method="post">{% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="mt-5 md-5 text-center">
+                <input class="btn btn-secondary" type="submit" value="提交">
+            </div>
+        </form>
+    </section>
 {% endblock %}

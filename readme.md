@@ -184,3 +184,9 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. 简历与当前用户关联
 1. 使用通用视图 `CreateView`
 
+## 使用 CSS 框架定制页面
+
+1. [django-bootstrap](https://github.com/zelenij/django-bootstrap-v5)
+1. [django-bulma](https://github.com/timonweb/django-bulma)
+1. [django-tailwind](https://github.com/timonweb/django-tailwind)
+
