@@ -6,6 +6,7 @@ import logging
 from django.contrib import admin
 from django.http import HttpResponse
 from django.db.models import Q
+from django.utils.safestring import mark_safe
 
 
 from .models import Candidate
@@ -13,6 +14,7 @@ from .candidate_fieldsets import basic_fieldsets
 from .candidate_fieldsets import first_interviewer_fieldsets
 from .candidate_fieldsets import second_interviewer_fieldsets
 from .candidate_fieldsets import hr_interviewer_fieldsets
+from jobs.models import Resume
 
 LOG = logging.getLogger()
 
@@ -60,7 +62,7 @@ class CandidateAdmin(admin.ModelAdmin):
     exclude = ('creator', 'created_date', 'modified_date', 'last_editor')
 
     list_display = (
-    'username', 'city', 'bachelor_school', 'test_score_of_general_ability',
+    'username', 'city', 'get_resume', 'bachelor_school', 'test_score_of_general_ability',
     'paper_score', 'first_score', 'first_result', 'first_interviewer_user', 'second_score',
     'second_result', 'second_interviewer_user', 'hr_score', 'hr_result', 'hr_interviewer_user',)
 
@@ -68,9 +70,19 @@ class CandidateAdmin(admin.ModelAdmin):
 
     list_filter = ('city', 'gender')
 
-    ordering = ('test_score_of_general_ability', 'paper_score')
+    ordering = ('-test_score_of_general_ability', '-paper_score')
 
     actions = (export_model_as_csv,)
+
+    def get_resume(self, obj):
+        rv = ""
+        resumes = Resume.objects.filter(phone=obj.phone)
+        if resumes and len(resumes) > 0:
+            rv = mark_safe(f'<a href="/resume/{resumes[0].id}" target="_blank">查看简历</a')
+        return rv
+
+    get_resume.short_description = '查看简历'
+    get_resume.allow_tags = True
 
     def has_export_permission(self, request):
         return request.user.has_perm(f'{self.opts.app_label}.export')

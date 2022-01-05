@@ -35,7 +35,11 @@ def job_detail(request, job_id):
 
     LOG.info(f"request method: {request.method}, path: {request.path}")
     return render(request, 'jobs/job_detail.html', context)
-    
+
+
+class ResumeDetailView(generic.detail.DetailView):
+    model = Resume
+
 
 class ResumeCreateView(LoginRequiredMixin, generic.edit.CreateView):
     """    简历职位页面  """

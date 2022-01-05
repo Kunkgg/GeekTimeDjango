@@ -152,8 +152,17 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 
 ### 安排简历进入面试环节
 
+1. 实际就是根据 Resume 对象在 Candidate 表里创建相应的候选人对象
 1. Resume admin 增加 `enter_interview_process` action
 1. 使用 Django message
+
+### 用户简历详情页面
+
+1. 使用通用视图 `DetailView` 展示用户简历详情页面
+
+### 自定义 admin 列表字段
+
+1. 为 admin Candidate(应聘者) 列表页面增加一个字段，用于显示候选人原始简历链接
 
 ## 完善项目
 ### 如何使用日志
