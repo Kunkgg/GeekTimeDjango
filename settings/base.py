@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     # 'kolo.middleware.KoloMiddleware',
+    'interview.performance.performance_logger_middleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -210,7 +211,6 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
         },
-
         'mail_admins': { # Add Handler for mail_admins for `warning` and above
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
@@ -221,7 +221,6 @@ LOGGING = {
             'formatter': 'simple',
             'filename':str(LOG_DIR / 'admin.log'),
         },
-
         'performance': {
             #'level': 'INFO',
             'class': 'logging.FileHandler',
@@ -240,14 +239,12 @@ LOGGING = {
             "handlers": ["console", "file"],
             "level": "DEBUG",
         },
-    }
-
-    #     "interview.performance": {
-    #         "handlers": ["console", "performance"],
-    #         "level": "INFO",
-    #         "propagate": False,
-    #     },
-    # },
+        "interview.performance": {
+            "handlers": ["console", "performance"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
 }
 #endregion
 

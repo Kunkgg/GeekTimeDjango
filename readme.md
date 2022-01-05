@@ -215,3 +215,16 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
     python manage.py inspectdb --settings=settings.local --database=toy > models.py
     ```
 1. 在 settings 中通过 `DATABASE_ROUTERS` 引入多数据库路由
+
+## 自定义中间件
+
+1. 什么是中间件？
+    - 注入在请求/响应流程中的钩子框架，可以对 request/response 做自定义的处理
+1. 常见应用场景
+    - 登录认证，安全拦截
+    - 日记记录，性能分析
+    - 缓存处理，告警监控
+
+### 自定义性能日志中间件 performance_logger_middleware
+
+1. 定义函数 `performance_logger_middleware(get_response)`
