@@ -15,16 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
+from django.utils.translation import gettext_lazy as _
+
+
 from jobs import views as jobs_views
 
-admin.site.site_header = '匠果科技招聘系统'
-admin.site.site_title = '匠果科技招聘系统'
+admin.site.site_header = _('匠果科技招聘系统')
+admin.site.site_title = _('匠果科技招聘系统')
 
 urlpatterns = [
     path('', jobs_views.job_list),
     path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume_add'),
     path('resume/<int:pk>/', jobs_views.ResumeDetailView.as_view(), name='resume_detail'),
     path('grappelli/', include('grappelli.urls')),
+    path('i18n/', include('django.conf.urls.i18n')),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
     path('jobs/', include('jobs.urls'), name='jobs'),

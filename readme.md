@@ -228,3 +228,19 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 ### 自定义性能日志中间件 performance_logger_middleware
 
 1. 定义函数 `performance_logger_middleware(get_response)`
+
+## 多语言支持
+
+1. 使用 gettext 或者 gettext_lazy 方法标记需要多语言支持的字符串
+1. 在 settings 修改语言相关的配置
+1. 在 settings 中增加中间件 `django.middleware.locale.LocaleMiddleware`,
+注意，该中间的顺序，在 `SessionMiddleware` 之后, 
+`CacheMiddleware` 和 `CommonMiddleware` 之前。
+1. 在模版中使用 `{% load i18n %}` 和 `translate`, `blocktranslate` 等标签
+1. 使用命令工具生成和编译 locale 文件
+    ```
+    python manage.py makemessages -l zh_HANS -l en
+    python manage.py compliemessages
+    ```
+1. 未解决问题：**部分** zh-HANS 翻译文本无法生效
+
