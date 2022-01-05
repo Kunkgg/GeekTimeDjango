@@ -1,0 +1,18 @@
+{% extends 'jobs/base.html' %}
+{% load bootstrap5 %}
+{% block bootstrap5_content %}
+    <section class="w-75 m-auto">
+        <h4 class="mt-5 text-center">用户登录</h4>
+        <form class="mt-5" method="post">{% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="mt-5 md-5 text-center">
+                <input class="btn btn-secondary" type="submit" value="提交">
+            </div>
+        </form>
+        <div>
+            <p>Forgot your password?<a href="{% url 'auth_password_reset' %}">Reset it</a>.</p>
+            <p>Not a member?<a href="{% url 'registration_register' %}">Register</a>.</p>
+        </div>
+    </section>
+{% endblock %}
+
