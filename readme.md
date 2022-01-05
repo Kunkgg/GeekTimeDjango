@@ -205,3 +205,13 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. [django-bootstrap](https://github.com/zelenij/django-bootstrap-v5)
 1. [django-bulma](https://github.com/timonweb/django-bulma)
 1. [django-tailwind](https://github.com/timonweb/django-tailwind)
+
+## 使用 inspectdb 和 多数据库路由为已有数据库生成管理后台
+
+1. 在 settings 中增加数据库配置
+1. 新建 app 用于管理已有数据库
+1. `inspectdb` 生成已有数据库的 `models.py`
+    ```
+    python manage.py inspectdb --settings=settings.local --database=toy > models.py
+    ```
+1. 在 settings 中通过 `DATABASE_ROUTERS` 引入多数据库路由

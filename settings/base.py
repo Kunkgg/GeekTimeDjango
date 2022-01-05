@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jobs',
     'interview',
+    'toy',
     'django_python3_ldap',
 ]
 
@@ -75,16 +76,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'recruitment.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+# ---------------------------------------------------------------------------
+#   Database
+#   https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+# ---------------------------------------------------------------------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASE_ROUTERS = ('settings.router.DatabaseRouter',)
 
 
 # Password validation
