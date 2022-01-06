@@ -27,14 +27,14 @@ def trigger_error(request):
     division_by_zero = 1 / 0
 
 urlpatterns = [
-    path('', jobs_views.job_list),
-    path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume_add'),
-    path('resume/<int:pk>/', jobs_views.ResumeDetailView.as_view(), name='resume_detail'),
-    path('grappelli/', include('grappelli.urls')),
+    path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('admin/', admin.site.urls),
+    path('grappelli/', include('grappelli.urls')),
+    path('', jobs_views.job_list),
     path('jobs/', include('jobs.urls'), name='jobs'),
+    path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume_add'),
+    path('resume/<int:pk>/', jobs_views.ResumeDetailView.as_view(), name='resume_detail'),
     # try sentry
     path('sentry-debug/', trigger_error),
 ]
