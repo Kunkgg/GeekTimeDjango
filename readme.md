@@ -254,3 +254,9 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 
 1. 当处理请求时间大于 `SLOW_MS` 时，认为时慢查询，使用 `capture_message` 上报
 1. 当处理请求过程中发生异常时， 使用 `capture_exception` 上报
+
+## 安全防护
+
+### 防止 XSS 
+
+### 防止 CRSF

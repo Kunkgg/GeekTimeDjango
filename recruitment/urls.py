@@ -35,6 +35,7 @@ urlpatterns = [
     path('jobs/', include('jobs.urls'), name='jobs'),
     path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume_add'),
     path('resume/<int:pk>/', jobs_views.ResumeDetailView.as_view(), name='resume_detail'),
+    path('resume_xss/<int:pk>/', jobs_views.detail_resume_xss, name='resume_detail_xss'),
     # try sentry
     path('sentry-debug/', trigger_error),
 ]

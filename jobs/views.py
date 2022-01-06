@@ -3,7 +3,7 @@ import logging
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 
 
 from .models import Job, Resume
@@ -63,3 +63,18 @@ class ResumeCreateView(LoginRequiredMixin, generic.edit.CreateView):
         self.object.applicant = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.success_url)
+
+
+def detail_resume_xss(request, pk):
+    '''demo for XSS
+    @retrun HTML content without escape
+    trigger xss:
+    <script>alert('page cookies:\n' + document.cookie);</script>
+    '''
+    try:
+        resume = Resume.objects.get(pk=pk)
+        content = "name: %s <br>  introduction: %s <br>" % (resume.username, resume.candidate_introduction)
+        return HttpResponse(content)
+    except Resume.DoesNotExist:
+        raise Http404("resume does not exist")
+
