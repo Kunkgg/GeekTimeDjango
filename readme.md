@@ -250,3 +250,7 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. 安装 `pip install sentry-sdk`
 1. 在 settings 中加入 sentry 初始化配置
 
+### 定义 Sentry 异常捕获和性能监控中间件
+
+1. 当处理请求时间大于 `SLOW_MS` 时，认为时慢查询，使用 `capture_message` 上报
+1. 当处理请求过程中发生异常时， 使用 `capture_exception` 上报
