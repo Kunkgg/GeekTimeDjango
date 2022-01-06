@@ -52,6 +52,9 @@ def export_model_as_csv(modeladmin, request, queryset):
     #     writer.writerow(csv_line_values)
     for obj in queryset:
         writer.writerow([getattr(obj, field) for field in field_list])
+    
+    username = request.user.username
+    LOG.info(f'{username} exported {len(queryset)} items from {model_name}')
 
     return response
 

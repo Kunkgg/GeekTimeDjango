@@ -23,6 +23,9 @@ from jobs import views as jobs_views
 admin.site.site_header = _('匠果科技招聘系统')
 admin.site.site_title = _('匠果科技招聘系统')
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
 urlpatterns = [
     path('', jobs_views.job_list),
     path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume_add'),
@@ -32,4 +35,6 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
     path('jobs/', include('jobs.urls'), name='jobs'),
+    # try sentry
+    path('sentry-debug/', trigger_error),
 ]

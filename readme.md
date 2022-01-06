@@ -244,3 +244,9 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
     ```
 1. 未解决问题：**部分** zh-HANS 翻译文本无法生效
 
+## 集成 Sentry
+
+1. 使用 docker-compose 部署 [Sentry-self-hosted](https://github.com/getsentry/self-hosted)
+1. 安装 `pip install sentry-sdk`
+1. 在 settings 中加入 sentry 初始化配置
+
