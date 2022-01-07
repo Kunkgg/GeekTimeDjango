@@ -203,6 +203,7 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 ### 使用 CSS 框架定制页面
 
 1. [django-bootstrap](https://github.com/zelenij/django-bootstrap-v5)
+    - 注意， 在使用 messages 的时候需要同时 `load bootstrap5` 和 `load i18n`
 1. [django-bulma](https://github.com/timonweb/django-bulma)
 1. [django-tailwind](https://github.com/timonweb/django-tailwind)
 
