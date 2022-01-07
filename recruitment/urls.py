@@ -36,6 +36,7 @@ urlpatterns = [
     path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume_add'),
     path('resume/<int:pk>/', jobs_views.ResumeDetailView.as_view(), name='resume_detail'),
     path('resume_xss/<int:pk>/', jobs_views.detail_resume_xss, name='resume_detail_xss'),
+    path('create_hr_user_csrf/', jobs_views.create_hr_user_csrf, name='create_hr_user_csrf'),
     # try sentry
     path('sentry-debug/', trigger_error),
 ]

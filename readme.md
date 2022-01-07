@@ -256,7 +256,13 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 1. 当处理请求过程中发生异常时， 使用 `capture_exception` 上报
 
 ## 安全防护
-
 ### 防止 XSS 
 
-### 防止 CRSF
+- 攻击者在提交的表单中注入脚本
+- 防止方式: 不直接返回未经转义的 html
+
+### 防止 CSRF
+
+- 攻击者建立伪装网站，在用户不知情的情况下利用表单绕过浏览器跨域限制，
+进而利用浏览器中的 cookie 实施攻击。
+- 防止方式: 在提交表单时使用 `csrf_token`

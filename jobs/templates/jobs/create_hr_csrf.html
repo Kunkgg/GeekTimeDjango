@@ -1,0 +1,27 @@
+{% extends 'jobs/base.html' %}
+{# Load the tag library #}
+{% load bootstrap5 %}
+{% load i18n %}
+
+{% block bootstrap5_content %}
+    {% for message in messages %}
+        <div class="{{ message|bootstrap_message_classes }} alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'close' %}"></button>
+            {{ message }}
+        </div>
+    {% endfor %}
+    <section class="w-75 m-auto">
+        <form action="http://127.0.0.1:8000/create_hr_user_csrf/" method="post" name='EvilForm'>
+        <h4 class="mt-5 text-center">Create HR account</h4>
+        {% csrf_token %}
+        <table>
+            <tr><th><label for="id_first_name">username:</label></th><td><input id="id_first_name" maxlength="100" name="username" type="text" required /></td></tr>
+            <tr><th><label for="id_password">password:</label></th><td><input id="id_password" maxlength="100" name="password" type="password" required /></td></tr>
+            <tr><th><label for="id_password_retype">password_retype:</label></th><td><input id="id_password_retype" maxlength="100" name="password_retype" type="password" required /></td></tr>
+        </table>
+        <div class="mt-5 md-5 text-center">
+            <input class="btn btn-secondary" type="submit" value="Submit">
+        </div>
+    </form>
+    </section>
+{% endblock %}
