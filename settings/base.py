@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'interview',
     'toy',
     'django_python3_ldap',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -291,3 +292,15 @@ sentry_sdk.init(
     send_default_pii=True
 )
 #endregion
+
+# ---------------------------------------------------------------------------
+#   REST Framework
+#   https://www.django-rest-framework.org/
+# ---------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

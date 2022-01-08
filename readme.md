@@ -267,3 +267,9 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 - 攻击者建立伪装网站，在用户不知情的情况下利用表单绕过浏览器跨域限制，
 进而利用浏览器中的 cookie 实施攻击。
 - 防止方式: 在提交表单时使用 `csrf_token`
+
+## Django Rest Framework (DRF)
+
+- https://www.django-rest-framework.org/
+- api url: http://localhost:8000/api/
+- 开放 Job， User 模型的 api

@@ -2,12 +2,15 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
+from rest_framework import viewsets
 
 from .forms import ResumeForm
 from .models import Cities, Job, JobTypes, Resume
+from .serializers import UserSerializer, JobSerializer
 
 LOG = logging.getLogger()
 
@@ -63,8 +66,21 @@ class ResumeCreateView(LoginRequiredMixin, generic.edit.CreateView):
         return HttpResponseRedirect(self.success_url)
 
 # ---------------------------------------------------------------------------
+#   REST framework
+# ---------------------------------------------------------------------------
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class JobViewSet(viewsets.ModelViewSet):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
+
+# ---------------------------------------------------------------------------
 #   Demo for web hack
 # ---------------------------------------------------------------------------
+#region
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import permission_required
 from django.views.decorators.csrf import csrf_exempt
@@ -116,3 +132,4 @@ def create_hr_user_csrf(request):
             messages.info(request, msg)
         return render(request, template_name)
     return render(request, template_name)
+#endregion

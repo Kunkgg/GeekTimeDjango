@@ -14,17 +14,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path, include
+from django.urls import include, path, re_path
 from django.utils.translation import gettext_lazy as _
-
-
+from rest_framework import routers
 from jobs import views as jobs_views
+
 
 admin.site.site_header = _('匠果科技招聘系统')
 admin.site.site_title = _('匠果科技招聘系统')
 
 def trigger_error(request):
     division_by_zero = 1 / 0
+
+# ---------------------------------------------------------------------------
+#   REST Framework
+# ---------------------------------------------------------------------------
+#region
+router = routers.DefaultRouter()
+router.register(r'users', jobs_views.UserViewSet)
+router.register(r'jobs', jobs_views.JobViewSet)
+urlpatterns_rest_framework = [
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls')),
+]
+#endregion
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,3 +54,5 @@ urlpatterns = [
     # try sentry
     path('sentry-debug/', trigger_error),
 ]
+
+urlpatterns += urlpatterns_rest_framework
