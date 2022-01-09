@@ -14,17 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path, re_path
+from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
+from django.http import HttpResponseServerError
 from rest_framework import routers
 from jobs import views as jobs_views
+from interview import views as interview_views
 
 
 admin.site.site_header = _('匠果科技招聘系统')
 admin.site.site_title = _('匠果科技招聘系统')
 
+#pylint: disable=unused-variable
 def trigger_error(request):
     division_by_zero = 1 / 0
+    return HttpResponseServerError()
+#pylint: enable=unused-variable
 
 # ---------------------------------------------------------------------------
 #   REST Framework
@@ -33,6 +38,8 @@ def trigger_error(request):
 router = routers.DefaultRouter()
 router.register(r'users', jobs_views.UserViewSet)
 router.register(r'jobs', jobs_views.JobViewSet)
+router.register(r'candidate', interview_views.CandidateViewSet)
+
 urlpatterns_rest_framework = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
