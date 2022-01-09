@@ -63,7 +63,7 @@ class ResumeCreateView(LoginRequiredMixin, generic.edit.CreateView):
         self.object = form.save(commit=False)
         self.object.applicant = self.request.user
         self.object.save()
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(self.get_success_url())
 
 # ---------------------------------------------------------------------------
 #   REST framework

@@ -1,20 +1,17 @@
-from datetime import datetime
 import csv
 import logging
-
+from datetime import datetime
 
 from django.contrib import admin
-from django.http import HttpResponse
 from django.db.models import Q
+from django.http import HttpResponse
 from django.utils.safestring import mark_safe
-
-
-from .models import Candidate
-from .candidate_fieldsets import basic_fieldsets
-from .candidate_fieldsets import first_interviewer_fieldsets
-from .candidate_fieldsets import second_interviewer_fieldsets
-from .candidate_fieldsets import hr_interviewer_fieldsets
 from jobs.models import Resume
+
+from .candidate_fieldsets import (basic_fieldsets, first_interviewer_fieldsets,
+                                  hr_interviewer_fieldsets,
+                                  second_interviewer_fieldsets)
+from .models import Candidate
 
 LOG = logging.getLogger()
 
@@ -52,7 +49,6 @@ def export_model_as_csv(modeladmin, request, queryset):
     #     writer.writerow(csv_line_values)
     for obj in queryset:
         writer.writerow([getattr(obj, field) for field in field_list])
-    
     username = request.user.username
     LOG.info(f'{username} exported {len(queryset)} items from {model_name}')
 
@@ -92,7 +88,7 @@ class CandidateAdmin(admin.ModelAdmin):
 
     # fieldsets = hr_interviewer_fieldsets
 
-    def get_fieldsets(self, request, obj):
+    def get_fieldsets(self, request, obj=None):
         rv = basic_fieldsets
         group_names = self.get_group_names(request.user)
         if request.user.username == 'admin' or 'HR' in group_names:
@@ -109,7 +105,7 @@ class CandidateAdmin(admin.ModelAdmin):
     def get_group_names(self, user):
         return [group.name for group in user.groups.all()]
 
-    def get_readonly_fields(self, request, obj):
+    def get_readonly_fields(self, request, obj=None):
         group_names = self.get_group_names(request.user)
         LOG.info(f"user:{request.user.username}, group_names: {group_names}")
 
@@ -126,7 +122,9 @@ class CandidateAdmin(admin.ModelAdmin):
         if request.user.is_superuser or 'HR' in group_names:
             rv = qs
         elif 'Interviewer' in group_names:
-            rv = Candidate.objects.filter(Q(first_interviewer_user=request.user) | Q(second_interviewer_user=request.user))
+            rv = Candidate.objects.filter(
+                    Q(first_interviewer_user=request.user)
+                    | Q(second_interviewer_user=request.user))
 
         return rv
 

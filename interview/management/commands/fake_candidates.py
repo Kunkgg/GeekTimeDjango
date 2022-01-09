@@ -56,6 +56,7 @@ def write_csv(fn, rows, header=None):
 
 def read_csv(fn, has_header=False):
     rows = []
+    header = []
     line_no = 0
     with open(fn, mode='r', newline='') as fp:
         reader = csv.reader(fp)

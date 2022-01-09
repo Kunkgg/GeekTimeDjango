@@ -3,7 +3,6 @@
         "*.ttml": "xml",
         "*.ttss": "css"
     },
-    "python.pythonPath": "/home/gk07/.local/pyenv/versions/3.9.6/envs/GeekTimeDjango/bin/python",
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#2f7c47",
         "activityBar.activeBorder": "#422c74",
