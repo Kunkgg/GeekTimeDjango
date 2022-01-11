@@ -2,7 +2,7 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
@@ -10,7 +10,7 @@ from rest_framework import viewsets
 
 from .forms import ResumeForm
 from .models import Cities, Job, JobTypes, Resume
-from .serializers import UserSerializer, JobSerializer
+from .serializers import UserSerializer, JobSerializer, ResumeSerializer
 
 LOG = logging.getLogger()
 
@@ -77,11 +77,14 @@ class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
 
+class ResumeViewSet(viewsets.ModelViewSet):
+    queryset = Resume.objects.all()
+    serializer_class = ResumeSerializer
+
 # ---------------------------------------------------------------------------
 #   Demo for web hack
 # ---------------------------------------------------------------------------
 #region
-from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import permission_required
 from django.views.decorators.csrf import csrf_exempt
 

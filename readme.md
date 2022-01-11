@@ -272,4 +272,4 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 
 - https://www.django-rest-framework.org/
 - api url: http://localhost:8000/api/
-- 开放 Job， User 模型的 api
+- 开放 Job， User, Candidate, Resume 模型的 api
