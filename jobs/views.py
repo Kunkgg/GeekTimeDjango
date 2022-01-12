@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,11 +7,14 @@ from django.contrib.auth.models import Group, User
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
+from django.utils import timezone
 from rest_framework import viewsets
+from rest_framework import permissions
 
-from .forms import ResumeForm
-from .models import Cities, Job, JobTypes, Resume
-from .serializers import UserSerializer, JobSerializer, ResumeSerializer
+from jobs.forms import ResumeForm
+from jobs.models import Cities, Job, JobTypes, Resume
+from jobs.serializers import UserSerializer, JobSerializer, ResumeSerializer
+from jobs.permissions import IsHROrReadOnly
 
 LOG = logging.getLogger()
 
@@ -76,6 +80,17 @@ class UserViewSet(viewsets.ModelViewSet):
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsHROrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(
+            creator=self.request.user,
+            created_date=timezone.now(),
+            modified_date=timezone.now())
+
+    def perform_update(self, serializer):
+        serializer.save(modified_date=timezone.now())
 
 class ResumeViewSet(viewsets.ModelViewSet):
     queryset = Resume.objects.all()

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from rest_framework import serializers
 
@@ -13,10 +14,22 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class JobSerializer(serializers.HyperlinkedModelSerializer):
+    creator = serializers.ReadOnlyField(source='creator.username')
+    created_date = serializers.DateTimeField(read_only=True)
+    modified_date = serializers.DateTimeField(read_only=True)
     class Meta:
         model = Job
-        fields = '__all__'
-
+        fields = [
+            'url',
+            'creator',
+            'job_type',
+            'job_name',
+            'job_city',
+            'job_responsibility',
+            'job_requirement',
+            'created_date',
+            'modified_date',
+        ]
 
 class ResumeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

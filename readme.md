@@ -273,3 +273,10 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
 - https://www.django-rest-framework.org/
 - api url: http://localhost:8000/api/
 - 开放 Job， User, Candidate, Resume 模型的 api
+
+### api 权限设置
+
+- Job 权限
+    - `superuser` 和 `HR` 组成员可以编辑
+    - 未登录用户及其他用户只读
+    - `Job.creator`, `Job.created_date` 和 `Job.modified_date` 属性始终只读

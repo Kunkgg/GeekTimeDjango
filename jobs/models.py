@@ -47,7 +47,7 @@ class Job(models.Model):
     job_requirement = models.TextField(max_length=1024, verbose_name=_('职位要求'))
     creator = models.ForeignKey(User, null=True, verbose_name=_('创建人'), on_delete=models.SET_NULL)
     created_date = models.DateTimeField(verbose_name=_('创建时间'), default=datetime.now)
-    modified_date = models.DateTimeField(verbose_name=_('创建时间'), default=datetime.now)
+    modified_date = models.DateTimeField(verbose_name=_('修改时间'), default=datetime.now)
 
     class Meta:
         verbose_name = _('职位')
