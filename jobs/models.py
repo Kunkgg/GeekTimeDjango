@@ -83,6 +83,7 @@ class Resume(models.Model):
     class Meta:
         verbose_name = _('简历')
         verbose_name_plural = _('简历列表')
+        ordering = ('-created_date',)
     
     def __str__(self):
         return self.username

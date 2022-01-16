@@ -20,3 +20,35 @@ class IsHROrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         return user.is_superuser or is_group_member(user, group_names)
+
+
+class IsUserSelf(permissions.BasePermission):
+    def has_permission(self, request, view):
+        user = request.user
+        if user:
+            if user.is_authenticated and request.method in permissions.SAFE_METHODS:
+                return True
+            return user.is_superuser
+
+    def has_object_permission(self, request, view, obj):
+        user = request.user
+        if user:
+            if user.is_authenticated and request.method in permissions.SAFE_METHODS and user == obj:
+                return True
+            return user.is_superuser or user == obj
+
+        
+class IsResumeManager(permissions.BasePermission):
+    def has_permission(self, request, view):
+        user = request.user
+        if user:
+            if user.is_authenticated and request.method in permissions.SAFE_METHODS:
+                return True
+            return user.is_superuser
+
+    def has_object_permission(self, request, view, obj):
+        user = request.user
+        if user:
+            if user.is_authenticated and request.method in permissions.SAFE_METHODS and user == obj:
+                return True
+            return user.is_superuser or user == obj

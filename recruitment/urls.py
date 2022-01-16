@@ -39,7 +39,7 @@ router = routers.DefaultRouter()
 router.register(r'users', jobs_views.UserViewSet)
 router.register(r'jobs', jobs_views.JobViewSet)
 router.register(r'candidate', interview_views.CandidateViewSet)
-router.register(r'resumes', jobs_views.ResumeViewSet)
+router.register(r'resumes', jobs_views.ResumeViewSet, basename='resume-list')
 
 urlpatterns_rest_framework = [
     path('api/', include(router.urls)),
@@ -55,10 +55,10 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('', jobs_views.job_list),
     path('jobs/', include('jobs.urls'), name='jobs'),
-    path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume_add'),
-    path('resume/<int:pk>/', jobs_views.ResumeDetailView.as_view(), name='resume_detail'),
-    path('resume_xss/<int:pk>/', jobs_views.detail_resume_xss, name='resume_detail_xss'),
-    path('create_hr_user_csrf/', jobs_views.create_hr_user_csrf, name='create_hr_user_csrf'),
+    path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume-add'),
+    path('resume/<int:pk>/', jobs_views.ResumeDetailView.as_view(), name='resume-detail'),
+    path('resume_xss/<int:pk>/', jobs_views.detail_resume_xss, name='resume-detail-xss'),
+    path('create_hr_user_csrf/', jobs_views.create_hr_user_csrf, name='create-hr-user-csrf'),
     # try sentry
     path('sentry-debug/', trigger_error),
 ]

@@ -1,3 +1,4 @@
+from email.mime import application
 import logging
 from datetime import datetime
 
@@ -8,13 +9,15 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
 from django.utils import timezone
+from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework import permissions
 
 from jobs.forms import ResumeForm
 from jobs.models import Cities, Job, JobTypes, Resume
 from jobs.serializers import UserSerializer, JobSerializer, ResumeSerializer
-from jobs.permissions import IsHROrReadOnly
+from jobs.permissions import IsHROrReadOnly, IsUserSelf
+from interview.models import Candidate
 
 LOG = logging.getLogger()
 
@@ -76,6 +79,7 @@ class ResumeCreateView(LoginRequiredMixin, generic.edit.CreateView):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsUserSelf]
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
@@ -93,8 +97,36 @@ class JobViewSet(viewsets.ModelViewSet):
         serializer.save(modified_date=timezone.now())
 
 class ResumeViewSet(viewsets.ModelViewSet):
-    queryset = Resume.objects.all()
+    # queryset = Resume.objects.all()
     serializer_class = ResumeSerializer
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def get_queryset(self):
+        qs = Resume.objects.none()
+        user = self.request.user
+        group_names = [group.name for group in user.groups.all()]
+        if user.is_superuser or 'HR' in group_names:
+            qs = Resume.objects.all()
+        elif 'Interviewer' in group_names:
+            qs = Resume.objects.all()
+            candidates = Candidate.objects.filter(
+                Q(first_interviewer_user=user) | Q(second_interviewer_user=user)
+            )
+            candidates_phones = [candidate.phone for candidate in candidates]
+            qs = Resume.objects.filter(phone__in=candidates_phones)
+        else:
+            qs = Resume.objects.filter(applicant=user.id)
+        return qs
+
+    def perform_create(self, serializer):
+        serializer.save(
+            applicant=self.request.user,
+            created_date=timezone.now())
+
+    def perform_update(self, serializer):
+        serializer.save(
+            applicant=self.request.user,
+            modified_date=timezone.now())
 
 # ---------------------------------------------------------------------------
 #   Demo for web hack

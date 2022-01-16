@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 from rest_framework import serializers
 
@@ -8,6 +7,8 @@ from .models import Job, Resume
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    username = serializers.CharField(read_only=True)
+    email = serializers.EmailField()
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'is_staff']
@@ -32,6 +33,8 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 class ResumeSerializer(serializers.HyperlinkedModelSerializer):
+    applicant = serializers.ReadOnlyField(source='applicant.username')
+    created_date = serializers.DateTimeField(read_only=True)
     class Meta:
         model = Resume
         fields = '__all__'

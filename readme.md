@@ -280,3 +280,15 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
     - `superuser` 和 `HR` 组成员可以编辑
     - 未登录用户及其他用户只读
     - `Job.creator`, `Job.created_date` 和 `Job.modified_date` 属性始终只读
+- User 权限
+    - 未登录用户无权限
+    - `superuser` 可编辑
+    - 其他登录用户仅允许编辑自己的 `User.email` 属性，其他属性只读
+    - 注意：直接使用 `django.contrib.auth.User` 可能导致无法控制权限, 
+    建议在所有 django 项目开始的时候都自定义 User 模型
+- Resume 权限
+    - 未登录用户无权限
+    - `superuser` 可编辑所有
+    - `HR` 组成员可以查看所有
+    - `Interviewer` 组成员仅可以查看被分配给自己的候选人的简历
+    - 其他一般登录用户仅查看、编辑和提交自己的简历
