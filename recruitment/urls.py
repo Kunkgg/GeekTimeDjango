@@ -36,10 +36,10 @@ def trigger_error(request):
 # ---------------------------------------------------------------------------
 #region
 router = routers.DefaultRouter()
-router.register(r'users', jobs_views.UserViewSet)
-router.register(r'jobs', jobs_views.JobViewSet)
-router.register(r'candidate', interview_views.CandidateViewSet)
-router.register(r'resumes', jobs_views.ResumeViewSet, basename='resume-list')
+router.register(r'users', jobs_views.UserViewSet, basename='api-users')
+router.register(r'jobs', jobs_views.JobViewSet, basename='api-jobs')
+router.register(r'candidate', interview_views.CandidateViewSet, basename='api-candidate')
+router.register(r'resumes', jobs_views.ResumeViewSet, basename='api-resumes')
 
 urlpatterns_rest_framework = [
     path('api/', include(router.urls)),

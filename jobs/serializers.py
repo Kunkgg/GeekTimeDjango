@@ -38,3 +38,6 @@ class ResumeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Resume
         fields = '__all__'
+        extra_kwargs = {
+            'url': {'view_name': 'api-resumes-detail'},
+        }
