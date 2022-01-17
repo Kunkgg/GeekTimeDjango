@@ -292,3 +292,10 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
     - `HR` 组成员可以查看所有
     - `Interviewer` 组成员仅可以查看被分配给自己的候选人的简历
     - 其他一般登录用户仅查看、编辑和提交自己的简历
+    - 自定义 action, `superuser` 和 `HR` 组成员可以将 `Resume` 转化为 `Candidate` 
+- Candidate 权限
+    - 未登录用户无权限
+    - `superuser` 可编辑所有
+    - `HR` 组成员可编辑所有
+    - `Interviewer` 组成员仅可以查看被分配给自己的候选人信息
+    - 其他一般登录用户无权限

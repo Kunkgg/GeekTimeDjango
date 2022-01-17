@@ -63,13 +63,14 @@ class CandidateAdmin(admin.ModelAdmin):
     list_display = (
     'username', 'city', 'get_resume', 'bachelor_school', 'test_score_of_general_ability',
     'paper_score', 'first_score', 'first_result', 'first_interviewer_user', 'second_score',
-    'second_result', 'second_interviewer_user', 'hr_score', 'hr_result', 'hr_interviewer_user',)
+    'second_result', 'second_interviewer_user', 'hr_score', 'hr_result', 'hr_interviewer_user',
+    'modified_date', 'created_date',)
 
     search_fields = ('username', 'city', 'bachelor_school', 'phone', 'email')
 
     list_filter = ('city', 'gender')
 
-    ordering = ('-test_score_of_general_ability', '-paper_score')
+    ordering = ('-modified_date', '-test_score_of_general_ability', '-paper_score')
 
     actions = (export_model_as_csv,)
 

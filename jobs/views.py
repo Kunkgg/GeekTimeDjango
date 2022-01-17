@@ -6,12 +6,14 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group, User
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.utils import timezone
 from django.db.models import Q
+from django.urls import reverse
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.decorators import action
 
 from jobs.forms import ResumeForm
 from jobs.models import Cities, Job, JobTypes, Resume
@@ -121,13 +123,25 @@ class ResumeViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(
             applicant=self.request.user,
-            created_date=timezone.now())
+            created_date=timezone.now(),
+            modified_date=timezone.now())
 
     def perform_update(self, serializer):
         serializer.save(
             applicant=self.request.user,
             modified_date=timezone.now())
 
+    @action(detail=True, permission_classes=[IsHROrReadOnly])
+    def enter_interview_process(self, request, *args, **kwargs):
+        resume = self.get_object()
+        candidate = Candidate()
+        # 把 obj 对象中的所有属性拷贝到 candidate 对象中:
+        candidate.__dict__.update(resume.__dict__)
+        candidate.created_date = datetime.now()
+        candidate.modified_date = datetime.now()
+        candidate.creator = request.user.username
+        candidate.save()
+        return redirect(reverse('api-candidate-detail', kwargs={'pk': candidate.pk}))
 # ---------------------------------------------------------------------------
 #   Demo for web hack
 # ---------------------------------------------------------------------------

@@ -12,6 +12,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'is_staff']
+        extra_kwargs = {
+            'url': {'view_name': 'api-users-detail'},
+        }
 
 
 class JobSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,6 +34,9 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
             'created_date',
             'modified_date',
         ]
+        extra_kwargs = {
+            'url': {'view_name': 'api-jobs-detail'},
+        }
 
 class ResumeSerializer(serializers.HyperlinkedModelSerializer):
     applicant = serializers.ReadOnlyField(source='applicant.username')
