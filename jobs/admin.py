@@ -68,4 +68,3 @@ class ResumeAdmin(admin.ModelAdmin):
 
 admin.site.register(Job, JobAdmin)
 admin.site.register(Resume, ResumeAdmin)
-

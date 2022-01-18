@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
-from .models import Job, Resume
+from jobs.models import Job, Resume
 
 
 # Serializers define the API representation.

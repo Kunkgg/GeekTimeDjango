@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import Resume
+from jobs.models import Resume
 
 
 class ResumeForm(ModelForm):
@@ -9,5 +9,5 @@ class ResumeForm(ModelForm):
 
         fields = ["username", "city", "phone",
         "email", "apply_position", "born_address", "gender",
-        "bachelor_school", "master_school", "major", "degree", 
+        "bachelor_school", "master_school", "major", "degree",
         "candidate_introduction", "work_experience", "project_experience"]
