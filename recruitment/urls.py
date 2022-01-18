@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 from django.http import HttpResponseServerError
+from django.views.generic.base import RedirectView
 from rest_framework import routers
 from jobs import views as jobs_views
 from interview import views as interview_views
@@ -54,6 +55,7 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('grappelli/', include('grappelli.urls')),
     path('', jobs_views.job_list),
+    # path('', RedirectView.as_view(pattern_name='jobs-index', permanent=False), name='home'),
     path('jobs/', include('jobs.urls'), name='jobs'),
     path('resume/add/', jobs_views.ResumeCreateView.as_view(), name='resume-add'),
     path('resume/<int:pk>/', jobs_views.ResumeDetailView.as_view(), name='resume-detail'),
