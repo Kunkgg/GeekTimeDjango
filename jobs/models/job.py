@@ -29,3 +29,4 @@ class Job(models.Model):
     class Meta:
         verbose_name = _('职位')
         verbose_name_plural = _('职位列表')
+        ordering = ('-created_date',)
