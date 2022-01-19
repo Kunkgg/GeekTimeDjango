@@ -299,3 +299,13 @@ python manage.py runserver [--settings path.to.settings_module] [host_ip:port]
     - `HR` 组成员可编辑所有
     - `Interviewer` 组成员仅可以查看被分配给自己的候选人信息
     - 其他一般登录用户无权限
+
+## 缓存
+
+- https://docs.djangoproject.com/en/4.0/topics/cache/
+- Django 支持多种缓存实现 Memcached, Redis, 数据库, 文件, 内存和自定义方式的缓存
+- Django 支持灵活的缓存策略, 包括:
+    - 整站缓存
+    - 视图缓存
+    - 模版的部分内容缓存
+    - 对 `Vary`, `Cache-Control` 等 header 字段配置
