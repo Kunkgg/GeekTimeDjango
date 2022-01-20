@@ -52,7 +52,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     # 'kolo.middleware.KoloMiddleware',
     # 'django.middleware.cache.UpdateCacheMiddleware',
-    # 'interview.performance.PerformanceAndExceptionLoggerMiddleware',
+    'interview.performance.PerformanceAndExceptionLoggerMiddleware',
+    # 'interview.performance.TryMiddleWare_1',
+    # 'interview.performance.TryMiddleWare_2',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -282,7 +284,7 @@ import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
-    dsn="http://702359fd005047c48573d37d42d3d824@127.0.0.1:9000/2",
+    dsn="http://7ecceb48fe6343b79f86cedd1790d6ce@localhost:9000/2",
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%

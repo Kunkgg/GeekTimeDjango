@@ -60,4 +60,37 @@ class PerformanceAndExceptionLoggerMiddleware:
             # capture exception to sentry:
             capture_exception(exception)
                 
-        return HttpResponse("Error processing the request, please contact the system administrator.", status=500)
+        # return HttpResponse("Error processing the request, please contact the system administrator.", status=500)
+
+
+class TryMiddleWare_1:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Code to be executed for each request before
+        # the view (and later middleware) are called.
+
+        LOG.info('*' * 20)
+        LOG.info(f'Before: {self.__class__.__name__}')
+        response = self.get_response(request)
+        LOG.info(f'After: {self.__class__.__name__}')
+        LOG.info('*' * 20)
+
+        return response
+
+class TryMiddleWare_2:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Code to be executed for each request before
+        # the view (and later middleware) are called.
+
+        LOG.info('*' * 20)
+        LOG.info(f'Before: {self.__class__.__name__}')
+        response = self.get_response(request)
+        LOG.info(f'After: {self.__class__.__name__}')
+        LOG.info('*' * 20)
+
+        return response
